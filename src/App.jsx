@@ -1,6 +1,7 @@
 import React from 'react';
 import MapComponent from './Map'; // Ensure this is the correct import
 
+
 function App() {
   return (
     <div className="App">
