@@ -98,6 +98,48 @@ const MapComponent = () => {
     const styleSwitcher = new LayerSwitcherControl({ basemaps: baseMaps, initialBasemap: 'STREETS' });
     map.addControl(styleSwitcher, 'bottom-left');
 
+    // Add location tags with hyperlinks
+    map.on('load', () => {
+      const locationTags = [
+        {
+          name: 'New Delhi',
+          coordinates: [77.2090, 28.6139],
+          link: 'https://heyzine.com/flip-book/d8c1c5c1e9.html#page/4',
+        },
+        {
+          name: 'Mumbai',
+          coordinates: [72.8777, 19.0759],
+          link: 'https://en.wikipedia.org/wiki/Mumbai',
+        },
+        {
+          name: 'Bengaluru',
+          coordinates: [77.5946, 12.9716],
+          link: 'https://heyzine.com/flip-book/d8c1c5c1e9.html#page/6',
+        },
+        {
+          name: 'Hyderabad',
+          coordinates: [78.4867, 17.3850],
+          link: 'https://en.wikipedia.org/wiki/Hyderabad',
+        },
+        {
+          name: 'Chennai',
+          coordinates: [80.2707, 13.0827],
+          link: 'https://en.wikipedia.org/wiki/Chennai',
+        },
+      ];
+
+      locationTags.forEach((location) => {
+        const marker = new maplibregl.Marker({
+          color: 'rgba(255, 165, 0, 0.8)', // Orange with 80% opacity
+          scale: 0.5, // Scale the marker to 0.5x
+        })
+          .setLngLat(location.coordinates)
+          .setPopup(new maplibregl.Popup({ offset: 25 }) // Offset the popup by 25px
+            .setHTML(`<a href="${location.link}" target="_blank">${location.name}</a>`))
+          .addTo(map);
+      });
+    });
+
     // Add event listener to get cursor coordinates
     map.on('mousemove', (e) => {
       const latLng = e.lngLat;
