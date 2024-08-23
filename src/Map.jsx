@@ -1,9 +1,10 @@
-import React, { useRef, useEffect } from 'react';
+import React, { useRef, useEffect, useState } from 'react';
 import maplibregl from 'maplibre-gl';
 import * as maptilersdk from '@maptiler/sdk'; // Import MapTiler SDK
 import "@maptiler/sdk/dist/maptiler-sdk.css"; // Import the CSS for MapTiler SDK
 
 const MAPTILER_API_KEY = 'TVcFvyFFFazAUCae4rHK';
+const WEATHER_API_KEY = '715c0cf517b04c0087c105026242308'; // Replace with your Weather API key
 
 maptilersdk.config.apiKey = MAPTILER_API_KEY;
 
@@ -84,6 +85,7 @@ class LayerSwitcherControl {
 
 const MapComponent = () => {
   const mapContainerRef = useRef(null);
+  const [weatherData, setWeatherData] = useState(null);
 
   useEffect(() => {
     const map = new maplibregl.Map({
@@ -96,10 +98,37 @@ const MapComponent = () => {
     const styleSwitcher = new LayerSwitcherControl({ basemaps: baseMaps, initialBasemap: 'STREETS' });
     map.addControl(styleSwitcher, 'bottom-left');
 
+    // Add event listener to get cursor coordinates
+    map.on('mousemove', (e) => {
+      const latLng = e.lngLat;
+      fetchWeatherData(latLng.lat, latLng.lng)
+        .then((data) => setWeatherData(data))
+        .catch((error) => console.error('Error fetching weather data:', error));
+    });
+
     return () => map.remove();
   }, []);
 
-  return <div ref={mapContainerRef} style={{ width: '100%', height: '500px' }} />;
+  const fetchWeatherData = (lat, lon) => {
+    const url = `https://api.weatherapi.com/v1/current.json?key=${WEATHER_API_KEY}&q=${lat},${lon}`;
+    return fetch(url)
+      .then((response) => response.json())
+      .then((data) => data);
+  };
+
+  return (
+    <div>
+      <div ref={mapContainerRef} style={{ width: '100%', height: '500px' }} />
+      {weatherData && (
+        <div style={{ position: 'absolute', top: '10px', right: '10px', padding: '10px', backgroundColor: 'rgba(255, 255, 255, 0.8)', borderRadius: '5px' }}>
+          <h4>Current Weather</h4>
+          <p>Temperature: {weatherData.current.temp_c}°C</p>
+          <p>Humidity: {weatherData.current.humidity}%</p>
+          <p>Weather: {weatherData.current.condition.text}</p>
+        </div>
+      )}
+    </div>
+  );
 };
 
 export default MapComponent;
