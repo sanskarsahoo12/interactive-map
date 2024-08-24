@@ -137,6 +137,24 @@ const MapComponent = () => {
           .setPopup(new maplibregl.Popup({ offset: 25 }) // Offset the popup by 25px
             .setHTML(`<a href="${location.link}" target="_blank">${location.name}</a>`))
           .addTo(map);
+
+        
+        marker.getElement().addEventListener('mouseenter', () => {
+          map.flyTo({
+            center: location.coordinates,
+            zoom: 10, 
+            speed: 0.5, 
+          });
+        });
+
+        
+        marker.getElement().addEventListener('mouseleave', () => {
+          map.flyTo({
+            center: [78.9629, 20.5937], 
+            zoom: 3.5, 
+            speed: 0.5,
+          });
+        });
       });
     });
 
@@ -172,6 +190,5 @@ const MapComponent = () => {
     </div>
   );
 };
-
 
 export default MapComponent;
