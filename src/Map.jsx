@@ -2,6 +2,8 @@ import React, { useRef, useEffect, useState } from 'react';
 import maplibregl from 'maplibre-gl';
 import * as maptilersdk from '@maptiler/sdk'; // Import MapTiler SDK
 import "@maptiler/sdk/dist/maptiler-sdk.css"; // Import the CSS for MapTiler SDK
+import './mapstyle.css';
+// Import the CSS for styling
 
 const MAPTILER_API_KEY = 'TVcFvyFFFazAUCae4rHK';
 const WEATHER_API_KEY = '715c0cf517b04c0087c105026242308'; // Replace with your Weather API key
@@ -32,6 +34,7 @@ class LayerSwitcherControl {
     this.container.classList.add("maplibregl-ctrl");
     this.container.classList.add("maplibregl-ctrl-basemaps");
     this.container.classList.add("closed");
+    this.container.id = "layer-switcher"; // Add an ID for styling
 
     switch (this.options.expandDirection || "right") {
       case "top":
@@ -96,7 +99,7 @@ const MapComponent = () => {
     });
 
     const styleSwitcher = new LayerSwitcherControl({ basemaps: baseMaps, initialBasemap: 'STREETS' });
-    map.addControl(styleSwitcher, 'bottom-left');
+    map.addControl(styleSwitcher,'bottom-left');
 
     // Add location tags with hyperlinks
     map.on('load', () => {
@@ -138,7 +141,6 @@ const MapComponent = () => {
             .setHTML(`<a href="${location.link}" target="_blank">${location.name}</a>`))
           .addTo(map);
 
-        
         marker.getElement().addEventListener('mouseenter', () => {
           map.flyTo({
             center: location.coordinates,
@@ -147,7 +149,6 @@ const MapComponent = () => {
           });
         });
 
-        
         marker.getElement().addEventListener('mouseleave', () => {
           map.flyTo({
             center: [78.9629, 20.5937], 
