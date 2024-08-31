@@ -2,6 +2,7 @@ import React, { useRef, useEffect, useState } from "react";
 import maplibregl from "maplibre-gl";
 import 'maplibre-gl/dist/maplibre-gl.css'; // Correct import for CSS
 import './mapstyle.css'; // Custom styles
+import { coordinates } from "@maptiler/sdk";
 
 const MAPTILER_API_KEY = "AXZusuZamaFGsiRflWNp"; // Your MapTiler API key
 const WEATHER_API_KEY = "715c0cf517b04c0087c105026242308"; // Your Weather API key
@@ -159,33 +160,194 @@ const MapComponent = () => {
       const styleSwitcher = new LayerSwitcherControl({ basemaps: baseMaps, initialBasemap: 'STREETS' });
       map.addControl(styleSwitcher, 'bottom-left');
 
-      // Add location tags with hyperlinks
       const locationTags = [
-        {
-          name: 'New Delhi',
-          coordinates: [77.2090, 28.6139],
-          link: 'https://heyzine.com/flip-book/d8c1c5c1e9.html#page/4',
+        
+        {//BASTAR DUSSEHRA
+          name: 'Bastar',
+          coordinates: [81.9339, 19.2073],
+          link: 'https://en.wikipedia.org/wiki/Bastar',
         },
-        {
-          name: 'Mumbai',
-          coordinates: [72.8777, 19.0759],
-          link: 'https://en.wikipedia.org/wiki/Mumbai',
+        
+        {//	RAYALASEEMA DANCE AND FOOD FEST
+          name: 'Chittoor',
+          coordinates: [79.1003, 13.2172],
+          link: 'https://en.wikipedia.org/wiki/Chittoor',
         },
-        {
-          name: 'Bengaluru',
-          coordinates: [77.5946, 12.9716],
-          link: 'https://heyzine.com/flip-book/d8c1c5c1e9.html#page/6',
+        {//	KARAM PARAB
+          name: 'Keonjhar',
+          coordinates: [85.6846, 21.5151],
+          link: 'https://en.wikipedia.org/wiki/Keonjhar',
         },
-        {
-          name: 'Hyderabad',
-          coordinates: [78.4867, 17.3850],
-          link: 'https://en.wikipedia.org/wiki/Hyderabad',
+        {//KARAM PARAB
+          name: 'Jhargram',
+          coordinates: [86.9974, 22.4550],
+          link: 'https://en.wikipedia.org/wiki/Jhargram',
         },
-        {
+        {//KARAM PARAB
+          name: 'Hazaribagh',
+          coordinates: [85.3637, 23.9925],
+          link: 'https://en.wikipedia.org/wiki/Hazaribagh',
+        },
+        {//SAMA CHAKEVA
+          name: 'Darbhanga',
+          coordinates: [85.8918, 26.1542],
+          link: 'https://en.wikipedia.org/wiki/Darbhanga',
+        },
+        {//THAI PUSAM
           name: 'Chennai',
-          coordinates: [80.2707, 13.0827],
+          coordinates: [80.2705, 13.0843],
           link: 'https://en.wikipedia.org/wiki/Chennai',
         },
+        {//DEHING PATKAI FESTIVAL
+          name: 'Tinsukia',
+          coordinates: [95.3558, 27.4886],
+          link: 'https://en.wikipedia.org/wiki/Tinsukia',
+        },
+        {//NUMAISH FESTIVAL
+          name: 'Hyderabad',
+          coordinates: [78.4772, 17.4065],
+          link: 'https://en.wikipedia.org/wiki/Hyderabad',
+        },
+        {//PANGSAU PASS WINTER FESTIVAL
+          name: 'Nampong',
+          coordinates: [96.1258, 27.2935],
+          link: 'https://en.wikipedia.org/wiki/Nampong',
+        },
+        {//TUSU PARAB
+          name: 'Ranchi',
+          coordinates: [85.3096, 23.3441],
+          link: 'https://en.wikipedia.org/wiki/Ranchi',
+        },
+        {//PACHMARHI UTSAV
+          name: 'Pachmarhi',
+          coordinates: [78.4346, 22.4674],
+          link: 'https://en.wikipedia.org/wiki/Pachmarhi',
+        },
+        {//LOKRANG FESTIVAL
+          name: 'Bhopal',
+          coordinates: [77.4126, 23.2599],
+          link: 'https://en.wikipedia.org/wiki/Bhopal',
+        },
+        {//HORNBILL FESTIVAL
+          name: 'Kishama Heritage Village',
+          coordinates: [94.1086, 25.6751],
+          link: 'https://en.wikipedia.org/wiki/Kohima',
+        },
+        { 
+          //LATMAR HOLI
+        name:'Barsana',
+        coordinates:[77.3768,27.6464],
+        link:'https://en.wikipedia.org/wiki/Barsana',
+
+
+
+        },
+        {//JHANDA FAIR
+          name: 'Dehradun',
+          coordinates: [78.0322, 30.3165],
+          link: 'https://en.wikipedia.org/wiki/Dehradun',
+        },
+        // {
+        //   name: 'Hill Miris',
+        //   coordinates: [90.6667, 24.35],
+        //   link: 'https://en.wikipedia.org/wiki/Hill_Miris',
+        // },
+     
+
+{//SHIGMO
+  name: 'Sal',
+  coordinates: [73.9283, 15.6928],
+  link: 'https://en.wikipedia.org/wiki/Sal,_Goa',
+},
+{
+  name: 'Pilgao',
+  coordinates: [73.9517, 15.5553],
+  link: 'https://en.wikipedia.org/wiki/Pilgao',
+},
+{
+  name: 'Kudne',
+  coordinates: [74.0128, 15.5437],
+  link: 'https://en.wikipedia.org/wiki/Kudne',
+},
+{//LUI  NGAI NI
+  name: 'Chandel',
+  coordinates: [94.0007, 24.3320],
+  link: 'https://en.wikipedia.org/wiki/Chandel_district',
+},
+{
+  name: 'Tamenglong',
+  coordinates: [93.5012, 24.9898],
+  link: 'https://en.wikipedia.org/wiki/Tamenglong_district',
+},
+{
+  name: 'Senapati',
+  coordinates: [94.1514, 25.3203],
+  link: 'https://en.wikipedia.org/wiki/Senapati_district',
+},
+{
+  name: 'Ukhrul',
+  coordinates: [94.3617, 25.0968],
+  link: 'https://en.wikipedia.org/wiki/Ukhrul_district',
+},
+{ //CHAPCHAR KUT
+  name: 'Aizwal',
+  coordinates: [92.7173, 23.7307],
+  link: 'https://en.wikipedia.org/wiki/Aizawl',
+},
+
+{//KARAGA FESTIVAL
+  name: 'Bangalore',
+  coordinates: [77.5835, 12.9655],
+  link: 'https://en.wikipedia.org/wiki/Dharmaraya_Swamy_Temple'
+},
+{//CHANDAN YATRA
+  name: 'Puri',
+  coordinates: [85.8179, 19.8049],
+  link: 'https://en.wikipedia.org/wiki/Jagannath_Temple,_Puri'
+},
+{//AMBUBACHI MELA
+  name: 'Guwahati',
+  coordinates: [91.7055, 26.1664],
+  link: 'https://en.wikipedia.org/wiki/Kamakhya_Temple'
+},
+{//SAKEWA
+  name: 'Rangrang Yangyang',
+  coordinates: [88.433, 27.300],
+  link: 'https://en.wikipedia.org/wiki/Rangrang_Yangyang'
+},
+{//KAVANT MELA
+  name: 'Kavant',
+  coordinates: [74.0550, 22.0921],
+  link: 'https://en.wikipedia.org/wiki/Kavant'
+},
+
+{//PEDAGATTU JATRA
+  name: 'Pedagattu',
+  coordinates: [79.6288, 17.1350],
+  link: 'https://en.wikipedia.org/wiki/Pedagattu'
+},
+
+//MONSOON
+
+{
+  name: 'Tendong Hill',
+  coordinates: [88.4081, 27.2061],
+  location: 'Namchi',
+  link: 'https://en.wikipedia.org/wiki/Tendong_Hill'
+},
+{
+  name: 'Konakani',
+  coordinates: [74.2167, 15.2667],
+  link: 'https://en.wikipedia.org/wiki/Konkani_language'
+},
+{
+  name: 'Odisha',
+  coordinates: [84.2700, 20.2376],
+  link: 'https://en.wikipedia.org/wiki/Odisha'
+}
+
+
+
       ];
 
       locationTags.forEach((location) => {
