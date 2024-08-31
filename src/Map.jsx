@@ -163,10 +163,11 @@ const MapComponent = () => {
       const locationTags = [
         
         {//BASTAR DUSSEHRA
-          name: 'Bastar',
-          coordinates: [81.9339, 19.2073],
-          link: 'https://en.wikipedia.org/wiki/Bastar',
-        },
+  name: 'Bastar',
+  coordinates: [81.9339, 19.2073],
+  description: 'Bastar is a district in the state of Chhattisgarh, known for its rich cultural heritage and traditional Dussehra celebrations. <a href="https://en.wikipedia.org/wiki/Bastar" target="_blank">Read more</a>',
+  imageUrl: 'src/assets/WhatsApp Image 2024-09-01 at 12.14.49 AM.jpeg', // URL of the image file
+},
         
         {//	RAYALASEEMA DANCE AND FOOD FEST
           name: 'Chittoor',
@@ -348,6 +349,9 @@ const MapComponent = () => {
 
 
 
+
+
+
       ];
 
       locationTags.forEach((location) => {
@@ -357,7 +361,11 @@ const MapComponent = () => {
         })
           .setLngLat(location.coordinates)
           .setPopup(new maplibregl.Popup({ offset: 25 }) // Offset the popup by 25px
-            .setHTML(`<a href="${location.link}" target="_blank">${location.name}</a>`))
+          .setHTML(`
+            <h4>${location.name}</h4>
+            <p>${location.description}</p>
+            <img src="${location.imageUrl}" alt="${location.name} image" style="width: 100px; height: 100px;">
+          `))
           .addTo(map);
 
         marker.getElement().addEventListener('mouseenter', () => {
@@ -410,5 +418,8 @@ const MapComponent = () => {
     </div>
   );
 };
+
+
+
 
 export default MapComponent;
