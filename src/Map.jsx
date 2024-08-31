@@ -5,7 +5,7 @@ import "@maptiler/sdk/dist/maptiler-sdk.css"; // Import the CSS for MapTiler SDK
 import './mapstyle.css';
 // Import the CSS for styling
 
-const MAPTILER_API_KEY = 'TVcFvyFFFazAUCae4rHK';
+const MAPTILER_API_KEY = 'AXZusuZamaFGsiRflWNp	';
 const WEATHER_API_KEY = '715c0cf517b04c0087c105026242308'; // Replace with your Weather API key
 
 maptilersdk.config.apiKey = MAPTILER_API_KEY;
